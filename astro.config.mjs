@@ -27,5 +27,9 @@ export default defineConfig({
     partytown(),
   ],
 
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
 });
