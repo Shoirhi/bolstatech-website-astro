@@ -1,0 +1,13 @@
+---
+import { ModeToggle } from "@/components/ModeToggle"
+import { Logo } from "@/components/Logo"
+import { SITE } from "@/config"
+---
+
+<header class="container sticky top-0 flex justify-between items-center py-2">
+  <a href="/">
+    <Logo />
+    <span class="sr-only">{SITE.title}</span>
+  </a>
+  <ModeToggle client:load />
+</header>
