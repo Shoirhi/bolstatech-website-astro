@@ -17,6 +17,16 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: "https://bolstatech.com",
 
+  vite: {
+    resolve: {
+      // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+      // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+      alias: import.meta.env.PROD ? {
+        "react-dom/server": "react-dom/server.edge",
+      } : undefined,
+    },
+  },
+
   integrations: [
     react(),
     tailwind({
@@ -27,9 +37,5 @@ export default defineConfig({
     partytown(),
   ],
 
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
+  adapter: cloudflare(),
 });
