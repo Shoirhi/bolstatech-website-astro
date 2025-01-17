@@ -5,8 +5,14 @@ export const SITE: SiteConfig = {
   description:
     "個人が運営するブログサイトです。Web開発、サイバーセキュリティの技術ブログや制作物を公開しています。たまにゲームや趣味の記事も投稿しています。",
   sns: {
-    twitter: "https://x.com/bolstatech",
-    github: "https://github.com/shoirhi",
+    x: {
+      url: "https://x.com/",
+      username: "bolstatech",
+    },
+    github: {
+      url: "https://github.com/",
+      username: "shoirhi",
+    },
   },
   sourceCode: "https://github.com/shoirhi/bolstatech-website-astro",
 };
