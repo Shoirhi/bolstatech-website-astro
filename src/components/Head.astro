@@ -1,11 +1,13 @@
 ---
 import { SEO } from "astro-seo";
+import { ClientRouter } from "astro:transitions";
 import { SITE } from "@/config";
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = SITE.description } = Astro.props;
 ---
 
 <head>
@@ -13,8 +15,38 @@ const { title } = Astro.props;
     title={title}
     titleTemplate=`%s - ${SITE.title}`
     titleDefault={SITE.title}
-    description={SITE.description}
+    description={description}
     charset="UTF-8"
+    openGraph={{
+      basic: {
+        title: title
+          ? `${title} | ${Astro.url.host}`
+          : `${SITE.title} | ${Astro.url.host}`,
+        type: "website",
+        image: `${Astro.url.origin}/og.jpg`,
+      },
+      optional: {
+        description: description,
+        locale: "ja_JP",
+        siteName: SITE.title,
+      },
+      image: {
+        type: "image/jpeg",
+        width: 1280,
+        height: 630,
+        alt: SITE.title,
+      },
+    }}
+    twitter={{
+      card: "summary_large_image",
+      site: `@${SITE.sns.x.username}`,
+      title: title
+        ? `${title} | ${Astro.url.host}`
+        : `${SITE.title} | ${Astro.url.host}`,
+      image: `${Astro.url.origin}/og.jpg`,
+      imageAlt: SITE.title,
+      description: description,
+    }}
     extend={{
       link: [
         {
@@ -39,4 +71,5 @@ const { title } = Astro.props;
       ],
     }}
   />
+  <ClientRouter />
 </head>
