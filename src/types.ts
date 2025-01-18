@@ -11,5 +11,5 @@ export interface SiteConfig {
       username: string,
     },
   };
-  sourceCode: string;
+  repositoryUrl: string;
 }

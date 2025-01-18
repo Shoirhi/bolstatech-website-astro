@@ -1,7 +1,20 @@
 ---
 import { SITE } from "@/config";
+import { buttonVariants } from "@/components/ui/button";
+import { LuGithub } from "react-icons/lu";
 ---
 
 <footer class="container sticky top-full py-2">
-  <p class="text-center text-sm">&copy; {new Date().getFullYear()} {SITE.title}</p>
+  <div class="flex justify-center">
+    <a
+      href={SITE.repositoryUrl}
+      class={buttonVariants({ variant: "link" })}
+      rel="noopener noreferrer"
+      target="_blank"><LuGithub />ソースコードを見る</a
+    >
+  </div>
+  <p class="text-center text-sm">
+    &copy; {new Date().getFullYear()}
+    {SITE.title}
+  </p>
 </footer>

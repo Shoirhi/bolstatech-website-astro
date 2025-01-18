@@ -14,5 +14,5 @@ export const SITE: SiteConfig = {
       username: "shoirhi",
     },
   },
-  sourceCode: "https://github.com/shoirhi/bolstatech-website-astro",
+  repositoryUrl: "https://github.com/shoirhi/bolstatech-website-astro",
 };
