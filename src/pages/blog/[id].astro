@@ -1,0 +1,19 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<PageLayout title={post.data.title}>
+  <div class="mt-10 prose dark:prose-invert" set:html={post.data.content} />
+</PageLayout>

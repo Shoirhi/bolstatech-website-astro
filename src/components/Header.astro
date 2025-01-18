@@ -1,6 +1,7 @@
 ---
 import { ModeToggle } from "@/components/ModeToggle"
 import { Logo } from "@/components/Logo"
+import { HeaderSheet } from "@/components/HeaderSheet"
 import { SITE } from "@/config"
 ---
 
@@ -9,5 +10,8 @@ import { SITE } from "@/config"
     <Logo />
     <span class="sr-only">{SITE.title}</span>
   </a>
-  <ModeToggle client:load />
+  <div class="flex items-center gap-2">
+    <ModeToggle client:load />
+    <HeaderSheet client:load />
+  </div>
 </header>

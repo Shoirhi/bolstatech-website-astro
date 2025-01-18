@@ -1,0 +1,47 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
+interface Props {
+  title: string;
+  parentPages?: Array<{
+    title: string;
+    href: string;
+  }>;
+}
+
+const { title, parentPages } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <Breadcrumb className="mt-14">
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">ホーム</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      {parentPages && parentPages.map((item)=>(
+        <BreadcrumbItem>
+          <BreadcrumbLink href={item.href}>{item.title}</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+      ))}
+      <BreadcrumbItem>
+        <BreadcrumbPage>{title}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+  <div class="mt-14">
+    <h1 class="text-3xl font-bold">{title}</h1>
+    <div class="mt-10">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

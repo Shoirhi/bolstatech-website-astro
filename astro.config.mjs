@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import react from "@astrojs/react";
 
@@ -26,6 +26,13 @@ export default defineConfig({
       alias: import.meta.env.PROD ? {
         "react-dom/server": "react-dom/server.edge",
       } : undefined,
+    },
+  },
+
+  env: {
+    schema: {
+      MICROCMS_API_KEY: envField.string({ context: "server", access: "secret" }),
+      MICROCMS_SERVICE_DOMAIN: envField.string({ context: "client", access: "public" }),
     },
   },
 
