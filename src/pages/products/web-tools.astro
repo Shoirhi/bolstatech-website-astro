@@ -1,0 +1,15 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getEntry } from "astro:content";
+
+const page = await getEntry("navigation", "web-tools");
+
+if (page === undefined) {
+  return Astro.redirect("/404");
+}
+
+---
+
+<PageLayout title={page.data.title}>
+
+</PageLayout>

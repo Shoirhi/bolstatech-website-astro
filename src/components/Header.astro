@@ -1,17 +1,40 @@
 ---
-import { ModeToggle } from "@/components/ModeToggle"
-import { Logo } from "@/components/Logo"
-import { HeaderSheet } from "@/components/HeaderSheet"
-import { SITE } from "@/config"
+import { getCollection } from "astro:content";
+import { ModeToggle } from "@/components/ModeToggle";
+import { Logo } from "@/components/Logo";
+import { HeaderSheet } from "@/components/HeaderSheet";
+import { HeaderNavigation } from "./HeaderNavigation";
+import { SITE } from "@/config";
+
+const navigation = await getCollection("navigation", ({ data }) => {
+  return data.archive === false;
+});
 ---
 
-<header class="container sticky top-0 flex justify-between items-center py-2">
+<header
+  class="container sticky top-0 grid grid-cols-[1fr_auto_1fr] items-center py-2"
+>
   <a href="/">
     <Logo />
     <span class="sr-only">{SITE.title}</span>
   </a>
-  <div class="flex items-center gap-2">
+  <div>
+    <div class="hidden lg:block">
+      <HeaderNavigation
+        navigation={navigation}
+        currentPath={Astro.url.pathname}
+        client:only="raect"
+      />
+    </div>
+  </div>
+  <div class="flex items-center gap-2 place-content-end">
     <ModeToggle client:load />
-    <HeaderSheet client:load />
+    <div class="lg:hidden">
+      <HeaderSheet
+        client:only="react"
+        navigation={navigation}
+        currentPath={Astro.url.pathname}
+      />
+    </div>
   </div>
 </header>
