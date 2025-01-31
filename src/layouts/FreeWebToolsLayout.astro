@@ -1,0 +1,84 @@
+---
+import type { Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import PageLayout from "@/layouts/PageLayout.astro";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CategoryNavigation } from "@/components/category-navigation";
+
+import { FaExternalLinkAlt } from "react-icons/fa";
+
+interface Props {
+  page: Page;
+  category?: CollectionEntry<"freeWebToolCategories">;
+  navigationInfo: CollectionEntry<"navigation">;
+}
+
+const { page, category, navigationInfo } = Astro.props;
+
+if (category) {
+  var pageTitle = `${navigationInfo.data.title}「${category.data.title}」編`;
+} else {
+  var pageTitle = navigationInfo.data.title;
+}
+
+const categories = await getCollection("freeWebToolCategories");
+---
+
+<PageLayout title={pageTitle} description={navigationInfo.data.description}>
+  <div class="space-y-8">
+    <CategoryNavigation
+      basePath={navigationInfo.data.path}
+      categories={categories}
+      currentCategory={category}
+    />
+    {
+      page.data.length ? (
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {page.data.map((post) => (
+            <li>
+              <Card>
+                <a
+                  href={`https://${post.data.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group"
+                >
+                  <CardHeader>
+                    <CardTitle className="text-lg break-all">
+                      {post.data.title}
+                    </CardTitle>
+                    <CardDescription className="group-hover:underline break-all">
+                      {post.data.url}
+                      <FaExternalLinkAlt className="ml-1.5 inline w-3 h-3 -mt-0.5" />
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p class="text-sm">{post.data.description}</p>
+                  </CardContent>
+                </a>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="prose dark:prose-invert">
+          <h2>準備中です！</h2>
+          <p>
+            このページでは、無料で使える便利なWebツールを紹介していきます。
+            <br />
+            ただいまコンテンツを準備中ですので、しばらくお待ちください。
+          </p>
+        </div>
+      )
+    }
+  </div>
+</PageLayout>

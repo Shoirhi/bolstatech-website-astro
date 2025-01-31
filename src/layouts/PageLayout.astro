@@ -11,16 +11,17 @@ import {
 
 interface Props {
   title: string;
+  description?: string;
   parentPages?: Array<{
     title: string;
     href: string;
   }>;
 }
 
-const { title, parentPages } = Astro.props;
+const { title, description, parentPages } = Astro.props;
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} description={description}>
   <Breadcrumb className="mt-14">
     <BreadcrumbList>
       <BreadcrumbItem>

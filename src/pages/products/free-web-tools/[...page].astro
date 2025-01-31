@@ -1,0 +1,21 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection, getEntry } from "astro:content";
+
+import FreeWebToolsLayout from "@/layouts/FreeWebToolsLayout.astro";
+
+const navigationInfo = await getEntry("navigation", "free-web-tools");
+
+if (navigationInfo === undefined) {
+  return Astro.redirect("/404");
+}
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("freeWebTools");
+  return paginate(posts, { pageSize: 2 });
+}
+
+const { page } = Astro.props;
+---
+
+<FreeWebToolsLayout page={page} navigationInfo={navigationInfo} />

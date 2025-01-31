@@ -1,0 +1,7 @@
+{
+  "title": "Min-Max-Value Interpolation",
+  "description": "指定したビューポート範囲内で、2つの値間のCSSクランプ（clamp）式を計算し、レスポンシブデザインを容易にするツールです。",
+  "url": "min-max-calculator.9elements.com",
+  "category": "web-development",
+  "addedDate": "2025-01-31"
+}

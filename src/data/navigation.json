@@ -2,19 +2,19 @@
   {
     "id": "blog",
     "title": "ブログ",
-    "path": "/blog",
+    "path": "/blog/",
     "description": "Web開発やサイバーセキュリティなど、主に技術的な発信をするブログ。"
   },
   {
-    "id": "web-tools",
-    "title": "Web便利ツール集",
-    "path": "/products/web-tools/",
-    "description": "Web上で使用できる便利なツールを集めました。"
+    "id": "free-web-tools",
+    "title": "無料Webツール集",
+    "path": "/products/free-web-tools/",
+    "description": "Web上で無料で使用できる便利なツールを集めました。"
   },
   {
     "id": "about",
     "title": "自己紹介",
-    "path": "/about",
+    "path": "/about/",
     "description": "私の経歴やスキル、趣味などを紹介。",
     "archive": true
   }

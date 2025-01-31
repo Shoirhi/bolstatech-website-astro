@@ -13,15 +13,15 @@ const { title, description = SITE.description } = Astro.props;
 <head>
   <SEO
     title={title}
-    titleTemplate=`%s - ${SITE.title}`
+    titleTemplate=`%s ｜ ${SITE.title}`
     titleDefault={SITE.title}
     description={description}
     charset="UTF-8"
     openGraph={{
       basic: {
         title: title
-          ? `${title} | ${Astro.url.host}`
-          : `${SITE.title} | ${Astro.url.host}`,
+          ? `${title} ｜ ${Astro.url.host}`
+          : `${SITE.title} ｜ ${Astro.url.host}`,
         type: "website",
         image: `${Astro.url.origin}/og.jpg`,
       },
