@@ -22,7 +22,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
       params: {
         categoryId: category.id,
       },
-      pageSize: 2,
+      pageSize: 16,
     });
   });
 }

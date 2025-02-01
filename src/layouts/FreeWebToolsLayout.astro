@@ -8,11 +8,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { CategoryNavigation } from "@/components/category-navigation";
+import { Pagination } from "@/components/pagination";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
 
@@ -80,5 +80,16 @@ const categories = await getCollection("freeWebToolCategories");
         </div>
       )
     }
+    <Pagination
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      basePath={navigationInfo.data.path}
+      url={{
+        next: page.url.next,
+        prev: page.url.prev,
+        first: page.url.first,
+        last: page.url.last,
+      }}
+    />
   </div>
 </PageLayout>

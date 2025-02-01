@@ -4,9 +4,9 @@ import { getCollection, getEntry } from "astro:content";
 
 import PageLayout from "@/layouts/PageLayout.astro";
 
-const navigationPage = await getEntry("navigation", "blog");
+const navigationInfo = await getEntry("navigation", "blog");
 
-if (navigationPage === undefined) {
+if (navigationInfo === undefined) {
   return Astro.redirect("/404");
 }
 
@@ -18,7 +18,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 const { page } = Astro.props;
 ---
 
-<PageLayout title={navigationPage.data.title} description={navigationPage.data.description}>
+<PageLayout title={navigationInfo.data.title} description={navigationInfo.data.description}>
   {page.data.length ? (
     <ul>
       {page.data.map((post) => (
