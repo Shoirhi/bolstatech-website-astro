@@ -2,7 +2,7 @@
 import type { GetStaticPathsOptions } from "astro";
 import { getCollection, getEntry } from "astro:content";
 
-import PageLayout from "@/layouts/PageLayout.astro";
+import BlogIndexLayout from "@/layouts/BlogIndexLayout.astro";
 
 const navigationInfo = await getEntry("navigation", "blog");
 
@@ -18,19 +18,4 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 const { page } = Astro.props;
 ---
 
-<PageLayout title={navigationInfo.data.title} description={navigationInfo.data.description}>
-  {page.data.length ? (
-    <ul>
-      {page.data.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}`}>{post.data.title}</a>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <div class="prose dark:prose-invert">
-      <h2>準備中です！</h2>
-      <p>このページでは、ブログ記事を公開していきます。ただいまコンテンツを準備中ですので、しばらくお待ちください。</p>
-    </div>
-  )}
-</PageLayout>
+<BlogIndexLayout page={page} navigationInfo={navigationInfo} />

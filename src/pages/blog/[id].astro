@@ -14,6 +14,6 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 ---
 
-<PageLayout title={post.data.title}>
+<PageLayout title={post.data.title} parentPages={[{ title: "すべてのブログ", href: "/blog" }]}>
   <div class="mt-10 prose dark:prose-invert" set:html={post.data.content} />
 </PageLayout>

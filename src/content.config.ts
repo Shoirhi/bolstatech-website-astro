@@ -31,6 +31,14 @@ const blog = defineCollection({
   }),
 });
 
+const blogCategories = defineCollection({
+  loader: microCMSContentLoader({
+    apiKey: import.meta.env.MICROCMS_API_KEY,
+    serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
+    endpoint: "blog-categories",
+  }),
+});
+
 const freeWebToolCategories = defineCollection({
   loader: file("src/data/free-web-tool-categories.json"),
   schema: z.object({
@@ -52,4 +60,4 @@ const freeWebTools = defineCollection({
   }),
 });
 
-export const collections = { navigation, blog, freeWebToolCategories, freeWebTools };
+export const collections = { navigation, blog, blogCategories, freeWebToolCategories, freeWebTools };

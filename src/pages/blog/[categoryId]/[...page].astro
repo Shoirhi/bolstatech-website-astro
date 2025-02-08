@@ -1,0 +1,36 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection, getEntry } from "astro:content";
+
+import BlogIndexLayout from "@/layouts/BlogIndexLayout.astro";
+
+const navigationInfo = await getEntry("navigation", "blog");
+
+if (navigationInfo === undefined) {
+  return Astro.redirect("/404");
+}
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const categories = await getCollection("blogCategories");
+  const posts = await getCollection("blog");
+
+  return categories.flatMap((category) => {
+    const filteredPosts = posts.filter(
+      (post) => post.data.category.id === category.id
+    );
+    return paginate(filteredPosts, {
+      params: {
+        categoryId: category.id,
+      },
+      pageSize: 16,
+    });
+  });
+}
+
+const { page } = Astro.props;
+const { categoryId } = Astro.params;
+
+const category = await getEntry("blogCategories", categoryId);
+---
+
+<BlogIndexLayout page={page} navigationInfo={navigationInfo} category={category} />

@@ -1,0 +1,79 @@
+---
+import type { Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import PageLayout from "@/layouts/PageLayout.astro";
+
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CategoryNavigation } from "@/components/category-navigation";
+import { Pagination } from "@/components/pagination";
+
+interface Props {
+  page: Page;
+  category?: CollectionEntry<"blogCategories">;
+  navigationInfo: CollectionEntry<"navigation">;
+}
+
+const { page, category, navigationInfo } = Astro.props;
+
+if (category) {
+  var pageTitle = `${category.data.title}に関する${navigationInfo.data.title}`;
+} else {
+  var pageTitle = `すべての${navigationInfo.data.title}`;
+}
+
+const categories = await getCollection("blogCategories");
+---
+
+<PageLayout title={pageTitle} description={navigationInfo.data.description}>
+  <div class="space-y-8">
+    <CategoryNavigation
+      basePath={navigationInfo.data.path}
+      categories={categories}
+      currentCategory={category}
+    />
+    {
+      page.data.length ? (
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {page.data.map((post) => (
+            <li>
+              <Card>
+                <a href={`/blog/${post.id}`} class="group">
+                  <CardHeader>
+                    <CardTitle className="text-lg break-all">
+                      {post.data.title}
+                    </CardTitle>
+                    <CardDescription>
+                      {post.data.publishedAt}
+                    </CardDescription>
+                  </CardHeader>
+                </a>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="prose dark:prose-invert">
+          <h2>準備中です！</h2>
+          <p>ただいまコンテンツを準備中ですので、しばらくお待ちください。</p>
+        </div>
+      )
+    }
+    <Pagination
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      basePath={navigationInfo.data.path}
+      url={{
+        next: page.url.next,
+        prev: page.url.prev,
+        first: page.url.first,
+        last: page.url.last,
+      }}
+    />
+  </div>
+</PageLayout>
