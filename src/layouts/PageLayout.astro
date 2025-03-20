@@ -28,7 +28,7 @@ const { title, description, parentPages } = Astro.props;
         <BreadcrumbLink href="/">ホーム</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
-      {parentPages && parentPages.map((item) => (
+      {parentPages && parentPages.map((item)=>(
         <BreadcrumbItem>
           <BreadcrumbLink href={item.href}>{item.title}</BreadcrumbLink>
         </BreadcrumbItem>
