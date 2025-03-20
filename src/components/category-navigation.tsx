@@ -37,7 +37,7 @@ export function CategoryNavigation({ basePath, categories, currentCategory }: {
         </NavigationMenuItem>
         {
           categories.map((category) => (
-            <NavigationMenuItem>
+            <NavigationMenuItem key={category.id}>
               <NavigationMenuLink
                 href={`${basePath}${category.id}`}
                 className={cn(navigationMenuTriggerStyle(), currentCategory?.id === category.id && currentCategoryStyle)}

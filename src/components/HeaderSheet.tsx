@@ -66,7 +66,7 @@ export function HeaderSheet({ navigation, currentPath }: { navigation: Array<Col
               {navigation.map((item, index) => item.data.children ?
                 <NavigationMenuItem key={index}>
                   <Collapsible defaultOpen={isPathMatching(currentPath, item.data.path)}>
-                    <CollapsibleTrigger className={cn(customNavigationMenuTriggerStyle({ targetPath: item.data.path }), "data-[active]:bg-inherit")}>
+                    <CollapsibleTrigger className={cn(customNavigationMenuTriggerStyle({ targetPath: item.data.path }), "data-active:bg-inherit")}>
                       {item.data.title}<IoIosArrowForward className="w-3 h-3 group-data-[state=open]:rotate-90 duration-150" />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="px-3 CollapsibleContent">
