@@ -16,20 +16,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://bolstatech.com",
-
-  // React 19でのエラーを回避するための設定
-  // https://github.com/facebook/react/issues/31827
-  // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
-  // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
   vite: {
-    resolve: {
-      alias: import.meta.env.PROD
-        ? {
-            "react-dom/server": "react-dom/server.edge",
-          }
-        : undefined,
-    },
-
     plugins: [tailwindcss()],
   },
 
