@@ -1,0 +1,32 @@
+---
+import PrototypeLayout from "@/layouts/PrototypeLayout.astro";
+import { getCollection } from "astro:content";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import EstimateSimulator from "@/components/estimate-simulator";
+
+export async function getStaticPaths() {
+  const products = await getCollection("estimateSimulatorProducts");
+
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<PrototypeLayout title="見積シミュレーター">
+  <Breadcrumb className="mb-16">
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/prototypes/estimate-simulator/">見積シミュレーター</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>{product.data.name}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+  <EstimateSimulator product={product.data} client:only="react" />
+</PrototypeLayout>

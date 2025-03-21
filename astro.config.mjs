@@ -17,6 +17,14 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://bolstatech.com",
   vite: {
+    resolve: {
+      // React 19での「MessageChannel」エラーを回避するための設定。https://github.com/facebook/react/issues/31827
+      alias: import.meta.env.PROD
+        ? {
+            "react-dom/server": "react-dom/server.edge",
+          }
+        : undefined,
+    },
     plugins: [tailwindcss()],
   },
 

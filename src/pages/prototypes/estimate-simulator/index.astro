@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import PrototypeLayout from "@/layouts/PrototypeLayout.astro";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
+const products = await getCollection("estimateSimulatorProducts");
+---
+
+<PrototypeLayout title="見積シミュレーター">
+  <Breadcrumb className="mb-16">
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbPage>見積シミュレーター</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {products.map((product) => (
+      <a href={`/prototypes/estimate-simulator/${product.id}`} class="block hover:opacity-90 transition-opacity">
+        <Card className="h-full">
+          <CardHeader>
+            <CardTitle>{product.data.name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {product.data.image && (
+              <div class="aspect-video overflow-hidden rounded-md">
+                <Image
+                  src={product.data.image}
+                  width={100}
+                  height={100}
+                  alt={product.data.name}
+                  class="h-full w-full object-cover"
+                />
+              </div>
+            )}
+          </CardContent>
+          <CardFooter>
+            <div class="text-sm text-muted-foreground">詳細を見る &rarr;</div>
+          </CardFooter>
+        </Card>
+      </a>
+    ))}
+  </div>
+</PrototypeLayout>

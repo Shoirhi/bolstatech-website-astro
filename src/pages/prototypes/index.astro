@@ -1,0 +1,31 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import {
+  Card,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+
+const prototypes = [
+  {
+    title: "見積もりシミュレーター",
+    path: "/prototypes/estimate-simulator/",
+  }
+]
+---
+
+<PageLayout title="プロトタイプ">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+    {prototypes.map((prototype) => (
+      <a href={prototype.path} class="block group">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg group-hover:underline">
+              {prototype.title}
+            </CardTitle>
+          </CardHeader>
+        </Card>
+      </a>
+    ))}
+  </div>
+</PageLayout>

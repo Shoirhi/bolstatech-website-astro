@@ -6,6 +6,12 @@
     "description": "Web開発やサイバーセキュリティなど、主に技術的な発信をするブログ。"
   },
   {
+    "id": "prototypes",
+    "title": "プロトタイプ",
+    "path": "/prototypes/",
+    "description": "プロトタイプのページです。"
+  },
+  {
     "id": "free-web-tools",
     "title": "無料Webツール集",
     "path": "/products/free-web-tools/",

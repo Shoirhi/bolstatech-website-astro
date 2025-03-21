@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={`プロトタイプ - ${title}`} noCommonComponents>
+  <div class="sticky top-0 z-10 bg-background/80 backdrop-blur-sm shadow-sm w-dvw mx-[calc(50%-50vw)] text-sm py-3 px-4 border-b font-bold">
+    <h1>
+      プロトタイプ - {title}
+    </h1>
+  </div>
+  <div class="container py-16">
+    <slot />
+  </div>
+</BaseLayout>

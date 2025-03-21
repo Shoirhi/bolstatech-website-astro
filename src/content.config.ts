@@ -60,4 +60,21 @@ const freeWebTools = defineCollection({
   }),
 });
 
-export const collections = { navigation, blog, blogCategories, freeWebToolCategories, freeWebTools };
+const estimateSimulatorProducts = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/data/estimate-simulator-products" }),
+  schema: z.object({
+    name: z.string(),
+    image: z.string(),
+    locations: z.array(z.object({
+      name: z.string(),
+      materials: z.array(z.object({
+        name: z.string(),
+        price: z.number(),
+        image: z.string(),
+      })),
+    })),
+    archive: z.boolean().default(false),
+  }),
+});
+
+export const collections = { navigation, blog, blogCategories, freeWebToolCategories, freeWebTools, estimateSimulatorProducts };
